@@ -9,38 +9,38 @@ public class Room {
 
 	public Room(int roomId) {
 		this.roomId = roomId;
-     bookings=new ArrayList<>();		
+		bookings = new ArrayList<>();
 	}
 
 	public int getRoomId() {
 		return roomId;
 	}
-	
+
 	public ArrayList<Booking> getBookings() {
 		return bookings;
 	}
 
 	public void setBookings(ArrayList<Booking> bookings) {
 		this.bookings = bookings;
-	}	
-	
-	public Integer distanceFromOtherBookings(Integer start, Integer end) {
-		Integer closestLeft=0;
-		Integer closestRight=0;	
-		
-		for (Booking booking:bookings) {
-			if (booking.getEnd()<start && booking.getEnd()>closestLeft)
-				closestLeft=booking.getEnd();	
-			
-			if (booking.getStart()>end && booking.getStart()<closestRight)
-				closestRight=booking.getStart();		
-		}
-				
-		Integer distance=(start-closestLeft)+(closestRight-end);
-		
-		return distance;		
 	}
-	
+
+	public Integer distanceFromOtherBookings(Integer start, Integer end) {
+		Integer closestLeft = 0;
+		Integer closestRight = 0;
+
+		for (Booking booking : bookings) {
+			if (booking.getEnd() < start && booking.getEnd() > closestLeft)
+				closestLeft = booking.getEnd();
+
+			if (booking.getStart() > end && booking.getStart() < closestRight)
+				closestRight = booking.getStart();
+		}
+
+		Integer distance = (start - closestLeft) + (closestRight - end);
+
+		return distance;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

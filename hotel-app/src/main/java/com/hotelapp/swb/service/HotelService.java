@@ -23,12 +23,12 @@ public class HotelService {
 	}
 
 	public void createHotel(Integer size) {
-		if ((size < 0) || (size > 1000))
+		if ((size < 1) || (size > 1000))
 			throw new RuntimeException("Invalid room number");
 
 		hotel = new Hotel(size);
 
-		for (int i = 0; i < size; i++)
+		for (int i = 1; i <= size; i++)
 			hotel.getHotelRooms().add(new Room(i));
 	}
 
@@ -43,7 +43,7 @@ public class HotelService {
 		if (start > end)
 			return false;
 
-		for (int i = 0; i < size; i++) {
+		for (int i = 1; i <= size; i++) {
 			room = hotel.getRoomById(i);
 
 			if (roomIsAvailable(room, start, end)) {
@@ -52,11 +52,12 @@ public class HotelService {
 		}
 
 		if (!availableRooms.isEmpty()) {
-			Room selectedRoom=roomSelection(availableRooms, start, end);
+			Room selectedRoom = roomSelection(availableRooms, start, end);
 			Booking newBooking = new Booking(start, end);
 			selectedRoom.getBookings().add(newBooking);
 			return true;
 		}
+		
 		return false;
 	}
 
@@ -64,15 +65,19 @@ public class HotelService {
 		Room selectedRoom = availableRooms.get(0);
 		Integer minDistance = selectedRoom.distanceFromOtherBookings(start, end);
 
-		for (int i = 1; i < hotel.getHotelSize(); i++) {
-			if (hotel.getRoomById(i).distanceFromOtherBookings(start, end) < minDistance) {
-				minDistance = hotel.getRoomById(i).distanceFromOtherBookings(start, end);
-				selectedRoom = hotel.getRoomById(i);
+		if (availableRooms.size() > 1)
+			for (int i = 1; i < availableRooms.size(); i++) {
+				Room room = availableRooms.get(i);
+				Integer distance = room.distanceFromOtherBookings(start, end);
+
+				if (distance < minDistance) {
+					minDistance = distance;
+					selectedRoom = room;
+				}
 			}
-		}
-		
+
 		return selectedRoom;
-	}	
+	}
 
 	public Boolean roomIsAvailable(Room room, Integer start, Integer end) {
 		List<Booking> bookings = room.getBookings();
@@ -86,6 +91,7 @@ public class HotelService {
 				}
 			}
 		}
+		
 		return available;
 	}	
 }

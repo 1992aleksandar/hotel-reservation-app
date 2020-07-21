@@ -1,0 +1,5 @@
+com\hotelapp\swb\entity\Room.class
+com\hotelapp\swb\entity\Booking.class
+com\hotelapp\swb\Main.class
+com\hotelapp\swb\service\HotelService.class
+com\hotelapp\swb\entity\Hotel.class

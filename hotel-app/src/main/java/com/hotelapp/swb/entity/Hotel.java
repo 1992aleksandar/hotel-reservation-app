@@ -28,9 +28,9 @@ public class Hotel {
 	}
 
 	public Room getRoomById(Integer id) {
-     if ((id<0) || (id>(hotelSize-1)))
+     if ((id<=0) || (id>(hotelSize)))
     	 throw new RuntimeException("No room with such id");
 		
-		return hotelRooms.get(id);	
+		return hotelRooms.get(id-1);	
 	}
 }

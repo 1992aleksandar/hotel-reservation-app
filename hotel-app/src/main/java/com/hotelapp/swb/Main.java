@@ -6,7 +6,7 @@ import com.hotelapp.swb.service.HotelService;
 
 public class Main {
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws InterruptedException {
 		try (Scanner scanner = new Scanner(System.in)) {
 			HotelService hotelService = new HotelService();			
 			Integer roomNumber;
@@ -35,9 +35,10 @@ public class Main {
 				System.out.println("Another booking? Press y for yes or any other key to exit the program.");
 				input = scanner.next();
 
-			} while (input.equals("y") || input.equals("Y"));
+			} while (input.equals("y") || input.equals("Y"));		
 		}
 		
 		System.out.println("Exiting the program.");
+		Thread.sleep(2000);		
 	}
 }
